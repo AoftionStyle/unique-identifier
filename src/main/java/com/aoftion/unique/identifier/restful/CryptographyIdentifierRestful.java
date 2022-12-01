@@ -22,7 +22,7 @@ public class CryptographyIdentifierRestful {
     private CryptographyIdentifier cryptographyIdentifier;
 
     @Value("${app.unique.identifier.x-api-key}")
-    private String xApiKey;
+    protected String xApiKey;
 
     public ResponseEntity<Object> generate(Map<String, String> requestHeaders, PlainText plainText) {
         try {
@@ -60,17 +60,17 @@ public class CryptographyIdentifierRestful {
         }
     } 
 
-    private void authorizeRequestHeader(Map<String, String> requestHeaders) {
+    protected void authorizeRequestHeader(Map<String, String> requestHeaders) {
         String invalidate = requestHeaders.get("x-api-key") == null ? "x-api-key" :
             requestHeaders.get("x-authorization") == null ? "x-authorization" : "null";
         log.debug("invalidate is {}", invalidate);
 
         if ( invalidate.equals("x-api-key") || requestHeaders.get("x-api-key").trim().isEmpty() ) {
-            throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "required x-api-key");
+            throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "Required x-api-key");
         } else if ( !requestHeaders.get("x-api-key").equals(this.xApiKey) ) {
-            throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "missed x-api-key");
-        } else if ( invalidate.equals("x-aauthorization") || requestHeaders.get("x-authorization").trim().isEmpty() ) {
-            throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "required x-authorization");
+            throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "Missed x-api-key");
+        } else if ( invalidate.equals("x-authorization") || requestHeaders.get("x-authorization").trim().isEmpty() ) {
+            throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "Required x-authorization");
         }
     }
 }
