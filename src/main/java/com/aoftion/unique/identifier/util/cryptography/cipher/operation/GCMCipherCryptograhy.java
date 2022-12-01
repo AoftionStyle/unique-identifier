@@ -32,10 +32,10 @@ public class GCMCipherCryptograhy implements CipherStringCryptography {
     private void validate() {
         if ( this.cipherCryptoConfiguration == null ) {
             log.error("cipherCryptoConfiguration is null");
-            throw new IllegalArgumentException("Require when `" + CipherCryptoConfiguration.class.getCanonicalName() + "` is null");
+            throw new IllegalArgumentException("Required when `" + CipherCryptoConfiguration.class.getSimpleName() + "` is null");
         } else if (this.cipherCryptographyFactory == null ) {
             log.error("cipherCryptographyFactory is null");
-            throw new IllegalArgumentException("Require when `" + CipherCryptographyFactory.class.getCanonicalName() + "` is null");
+            throw new IllegalArgumentException("Required when `" + CipherCryptographyFactory.class.getSimpleName() + "` is null");
         }
     }
 
