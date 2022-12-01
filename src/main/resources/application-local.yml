@@ -1,0 +1,12 @@
+app:
+    unique:
+        identifier:
+            x-api-key: "APIKEY#GENERATE"
+
+cryptography:
+    secret-key:
+        algorithm:
+            factory: PBKDF2WithHmacSHA512
+            spec: AES
+        passwording: password-generate-as-long-as-number-123456789
+        salting: aoftion-unique-identifier
